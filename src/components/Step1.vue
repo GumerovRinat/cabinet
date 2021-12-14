@@ -57,13 +57,13 @@ export default {
       color="#3650db"
       @click="handleBackToSite"
     >
-      Вернуться на сайт
+      Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР° СЃР°Р№С‚
     </v-btn>
     <div :class="$style.wrapper">
       <table :class="$style.mainTable">
         <thead>
           <tr>
-            <th :class="$style.col1">Выберите специальность врача</th>
+            <th :class="$style.col1">Р’С‹Р±РµСЂРёС‚Рµ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ РІСЂР°С‡Р°</th>
           </tr>
         </thead>
         <tbody>

@@ -105,7 +105,7 @@ export default {
       :class="$style.marginRight"
       @click="handleBackToSite"
     >
-      Вернуться на сайт
+      Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР° СЃР°Р№С‚
     </v-btn>
     <v-btn
       small
@@ -117,14 +117,14 @@ export default {
       <v-icon left>
         mdi-arrow-expand-left
       </v-icon>
-      Назад
+      РќР°Р·Р°Рґ
     </v-btn>
     <div :class="$style.wrapper">
       <div :class="$style.tableWrap">
         <table :class="$style.mainTable">
           <thead>
             <tr>
-              <th :class="$style.col1">Выберите врача</th>
+              <th :class="$style.col1">Р’С‹Р±РµСЂРёС‚Рµ РІСЂР°С‡Р°</th>
             </tr>
           </thead>
           <tbody>

@@ -18,7 +18,7 @@ export default {
       birth: "1980-01-01",
       menu: false,
       phone: null,
-      rules: [(value) => !!value || "Обязательное поле"],
+      rules: [(value) => !!value || "РћР±СЏР·Р°С‚РµР»СЊРЅРѕРµ РїРѕР»Рµ"],
       errFamily: null,
       errName: null,
       errOt: null,
@@ -34,23 +34,23 @@ export default {
   methods: {
     async handleSend() {
       if (!this.family || this.family.length < 2) {
-        this.errFamily = "Значение менее 2-х символов";
+        this.errFamily = "Р—РЅР°С‡РµРЅРёРµ РјРµРЅРµРµ 2-С… СЃРёРјРІРѕР»РѕРІ";
         return;
       }
       if (!this.name || this.name.length < 2) {
-        this.errName = "Значение менее 2-х символов";
+        this.errName = "Р—РЅР°С‡РµРЅРёРµ РјРµРЅРµРµ 2-С… СЃРёРјРІРѕР»РѕРІ";
         return;
       }
       if (!this.ot || this.ot.length < 2) {
-        this.errOt = "Значение менее 2-х символов";
+        this.errOt = "Р—РЅР°С‡РµРЅРёРµ РјРµРЅРµРµ 2-С… СЃРёРјРІРѕР»РѕРІ";
         return;
       }
       if (!this.birth) {
-        this.errBirth = "Обязательное поле";
+        this.errBirth = "РћР±СЏР·Р°С‚РµР»СЊРЅРѕРµ РїРѕР»Рµ";
         return;
       }
       if (!this.phone) {
-        this.errPhone = "Обязательное поле";
+        this.errPhone = "РћР±СЏР·Р°С‚РµР»СЊРЅРѕРµ РїРѕР»Рµ";
         return;
       }
       if (window.fbq) window.fbq("track", "Lead");
@@ -134,7 +134,7 @@ export default {
       :class="$style.marginRight"
       @click="handleBackToSite"
     >
-      Вернуться на сайт
+      Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР° СЃР°Р№С‚
     </v-btn>
     <v-btn
       small
@@ -146,7 +146,7 @@ export default {
       <v-icon left>
         mdi-arrow-expand-left
       </v-icon>
-      Назад
+      РќР°Р·Р°Рґ
     </v-btn>
     <v-dialog
       v-model="showForm"
@@ -156,28 +156,28 @@ export default {
     >
       <v-card>
         <v-card-title class="headline">
-          Заполните форму
+          Р—Р°РїРѕР»РЅРёС‚Рµ С„РѕСЂРјСѓ
         </v-card-title>
         <v-card-text>
           <v-text-field
             v-model="family"
             :rules="rules"
             :error-messages="errFamily"
-            label="Фамилия"
+            label="Р¤Р°РјРёР»РёСЏ"
             @input="() => (errFamily = null)"
           />
           <v-text-field
             v-model="name"
             :rules="rules"
             :error-messages="errName"
-            label="Имя"
+            label="РРјСЏ"
             @input="() => (errName = null)"
           />
           <v-text-field
             v-model="ot"
             :rules="rules"
             :error-messages="errOt"
-            label="Отчество"
+            label="РћС‚С‡РµСЃС‚РІРѕ"
             @input="() => (errOt = null)"
           />
           <v-menu
@@ -191,7 +191,7 @@ export default {
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="birth"
-                label="Дата рождения"
+                label="Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ"
                 prepend-icon="mdi-calendar"
                 readonly
                 v-bind="attrs"
@@ -212,7 +212,7 @@ export default {
             v-model="phone"
             :rules="rules"
             :error-messages="errPhone"
-            label="Телефон"
+            label="РўРµР»РµС„РѕРЅ"
             return-masked-value
             prefix="+7"
             v-mask="'(###)-###-##-##'"
@@ -221,7 +221,7 @@ export default {
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn small rounded dark color="#3650db" @click="handleSend">
-            Записаться
+            Р—Р°РїРёСЃР°С‚СЊСЃСЏ
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -229,17 +229,17 @@ export default {
     <div v-if="showTicket" :class="$style.ticket">
       <div>
         <div ref="ticket">
-          <p :class="$style.textCenter">Вы записаны на приём</p>
+          <p :class="$style.textCenter">Р’С‹ Р·Р°РїРёСЃР°РЅС‹ РЅР° РїСЂРёС‘Рј</p>
           <p>
-            <strong>ФИО врача:</strong>
+            <strong>Р¤РРћ РІСЂР°С‡Р°:</strong>
             <span :class="$style.text" v-text="params.item.params.name"></span>
           </p>
           <p>
-            <strong>Дата:</strong
+            <strong>Р”Р°С‚Р°:</strong
             ><span :class="$style.text" v-text="params.item.params.date"></span>
           </p>
           <p>
-            <strong>Время:</strong
+            <strong>Р’СЂРµРјСЏ:</strong
             ><span :class="$style.text" v-text="params.item.time"></span>
           </p>
         </div>
@@ -252,7 +252,7 @@ export default {
             color="#3650db"
             @click="handlePrint"
           >
-            Распечатать
+            Р Р°СЃРїРµС‡Р°С‚Р°С‚СЊ
           </v-btn>
         </p>
       </div>
