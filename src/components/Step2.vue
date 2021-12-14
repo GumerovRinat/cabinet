@@ -9,6 +9,7 @@ export default {
   },
   data() {
     return {
+      specData: null,
       tableData: [],
       dateData: null,
       timeData: [],
@@ -124,7 +125,8 @@ export default {
         <table :class="$style.mainTable">
           <thead>
             <tr>
-              <th :class="$style.col1">Выберите врача</th>
+              <th :class="$style.col1"
+              v-text="`Выберите врача (${this.params.specName})`"></th>
             </tr>
           </thead>
           <tbody>
