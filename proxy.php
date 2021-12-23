@@ -82,6 +82,10 @@ if($_GET["a"] === "Specialisation") {
   getQuery($_GET["a"]);
 }
 
+if($_GET["a"] === "Spec") {
+  getQuery($_GET["b"]);
+}
+
 if($_GET["a"] === "Doctor" || $_GET["a"] === "Schedule") {
   getQuery($_GET["b"]);
 }

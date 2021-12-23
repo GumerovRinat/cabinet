@@ -27,6 +27,18 @@ export async function getAffiliates() {
   return [error, result];
 }
 
+export async function getAffiliate(deptId) {
+  let error = null;
+  let result = null;
+  try {
+    const { data } = await axios.get(`?a=Spec&b=Specialisation/${deptId}`);
+    result = data;
+  } catch (e) {
+    error = e;
+  }
+  return [error, result];
+}
+
 export async function getPersonnel(deptId) {
   let error = null;
   let result = null;
