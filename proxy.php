@@ -6,7 +6,18 @@ header("Content-Type: application/json");
 
 function handleError($curl, $code) {
   header("HTTP/1.1 400 Bad Request");
-  echo json_encode($code . " �� ����� ������� ��������� ������. ���������� ��������� ������� �����.");
+  $msg="";
+  switch($code){
+    case 551: 
+      $msg = " Невозможно создать пациента. Обратитесь в клинику по телефону или лично.";
+      break;
+    case 552: 
+      $msg = " Выбранное время уже занято. Выберите другое время.";
+      break;
+    default: 
+      $msg = " Во время запроса произошла ошибка. Пожалуйста повторите попытку позже.";
+  }
+  echo json_encode($code . $msg);
   curl_close($curl);
   die;
 }
@@ -78,9 +89,9 @@ if($_GET["a"] === "Doctor" || $_GET["a"] === "Schedule") {
 if($_GET["a"] === "Visit") {
   $params = [
     "birthDate" => $_GET["birthDate"],
-    "family" => $_GET["family"],
-    "name" => $_GET["name"],
-    "ot" => $_GET["ot"],
+    "family" => iconv("windows-1251", "utf-8", $_GET["family"]),
+    "name" => iconv("windows-1251", "utf-8", $_GET["name"]),
+    "ot" => iconv("windows-1251", "utf-8", $_GET["ot"]),
     "phone" => $_GET["phone"],
     "recordId" => (int)$_GET["recordId"],
     "visitId" => (int)$_GET["visitId"]

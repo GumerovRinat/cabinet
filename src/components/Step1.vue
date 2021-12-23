@@ -28,7 +28,7 @@ export default {
           item
         })
       } else {
-        this.$emit("handleGo", { route: "Step2", id: item.specId });
+        this.$emit("handleGo", { route: "Step2", id: item.specId, specName: item.specName });
       }
       let docId = this.$get("docId");
       docId ? this.$setRouter(`?specId=${item.specId}&docId=${docId}`) : this.$setRouter(`?specId=${item.specId}`);
