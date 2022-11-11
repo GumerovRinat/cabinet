@@ -42,6 +42,7 @@ export default {
     const [error, result] = await api.getAffiliates();
     this.$processResponse(error, result);
     if (error) return;
+    console.log(result);
     this.tableData = result;
     this.checkURL();
   }

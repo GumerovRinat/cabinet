@@ -18,12 +18,15 @@ export default {
       birth: "1980-01-01",
       menu: false,
       phone: null,
+      cbpersonal: null,
       rules: [(value) => !!value || "Обязательное поле"],
+      phoneRule: [(value) => !!value || "Внимание! За день до приема вам позвонит администратор для подтверждения записи. Просим быть на связи, в противном случае ваша запись будет аннулирована."],
       errFamily: null,
       errName: null,
       errOt: null,
       errBirth: null,
-      errPhone: null
+      errPhone: null,
+      errPeronal: null
     };
   },
   watch: {
@@ -49,8 +52,12 @@ export default {
         this.errBirth = "Обязательное поле";
         return;
       }
-      if (!this.phone) {
-        this.errPhone = "Обязательное поле";
+      if (!this.phone || this.phone.length != 15) {
+        this.errPhone = "Внимание! За день до приема вам позвонит администратор для подтверждения записи. Просим быть на связи, в противном случае ваша запись будет аннулирована.";
+        return;
+      }
+      if(this.cbpersonal !== true){
+        this.errPeronal = "Подтвердите согласие"
         return;
       }
       if (window.fbq) window.fbq("track", "Lead");
@@ -74,6 +81,16 @@ export default {
         this.errPhone = null;
         this.showForm = false;
         this.showTicket = true;
+      }
+    },
+
+    handlePhoneKeyUp(e){
+      e.preventDefault();
+      if (!this.phone || this.phone.length != 15) {
+        this.errPhone = "Внимание! За день до приема вам позвонит администратор для подтверждения записи. Просим быть на связи, в противном случае ваша запись будет аннулирована.";
+      }
+      else{
+        this.errPhone = null;
       }
     },
 
@@ -151,7 +168,7 @@ export default {
     <v-dialog
       v-model="showForm"
       persistent
-      max-width="290"
+      max-width="500"
       v-click-outside="handleClickOutside"
     >
       <v-card>
@@ -202,7 +219,7 @@ export default {
               ref="picker"
               v-model="birth"
               :max="new Date().toISOString().substr(0, 10)"
-              min="1950-01-01"
+              min="1940-01-01"
               :first-day-of-week="1"
               :locale="$store.state.lang"
               @change="save"
@@ -210,13 +227,38 @@ export default {
           </v-menu>
           <v-text-field
             v-model="phone"
-            :rules="rules"
+            :rules="phoneRule"
             :error-messages="errPhone"
             label="Телефон"
             return-masked-value
             prefix="+7"
             v-mask="'(###)-###-##-##'"
+            @keyup="handlePhoneKeyUp"
           />
+          <v-checkbox 
+            v-model="cbpersonal"
+            :rules="rules"
+            :error-messages="errPeronal">
+            <template v-slot:label>
+              <div>
+                Я даю 
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <a
+                      target="_blank"
+                      href="https://xn--80afedoxbgis3o.xn--p1ai/write/PersonalDataAgreement.pdf"
+                      @click.stop
+                      v-on="on"
+                    >
+                      согласие на обработку
+                    </a>
+                  </template>
+                 Открыть ссылку в новом окне
+                </v-tooltip>
+                персональных данных
+              </div>
+            </template>
+          </v-checkbox>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
