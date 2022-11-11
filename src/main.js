@@ -43,7 +43,7 @@ Vue.prototype.$get = (keys) => {
     let key = data[0].replace(/\[.*/, '');
     let value = data[1] ? data[1] : '';
     if (data[0] !== key) {
-      let subkeys = data[0].match(/(?<=\[).*?(?=\])/g);
+      let subkeys = c(/(?<=\[).*?(?=\])/g);
       get[key] = get[key] ? get[key] : {};
       setElement(get[key], subkeys, value);
     } else {
