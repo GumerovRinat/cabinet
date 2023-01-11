@@ -86,11 +86,21 @@ export default {
   },
   async mounted() {
     this.setCalendarRange();
-    const [error, result] = await api.getPersonnel(this.params.id);
-    this.$processResponse(error, result);
-    if (error) return;
-    result.map(x => x.selected = false);
-    this.tableData = result;
+    console.log(this.params);
+    if(!this.params.smId){
+      const [error, result] = await api.getPersonnel(this.params.id);
+      this.$processResponse(error, result);
+      if (error) return;
+      result.map(x => x.selected = false);
+      this.tableData = result;
+    }
+    else{
+      const [error, result] = await api.getPersonnelBySm(this.params.smId);
+      this.$processResponse(error, result);
+      if (error) return;
+      result.map(x => x.selected = false);
+      this.tableData = result;
+    }
     this.checkURL();
   }
 };

@@ -2,6 +2,7 @@
 import Vue from "vue";
 import Step1 from "./components/Step1.vue";
 import StepSkip from "./components/StepSkip.vue";
+import StepSelectSm from "./components/StepSelectSm.vue";
 import Step2 from "./components/Step2.vue";
 import Step3 from "./components/Step3.vue";
 
@@ -10,6 +11,7 @@ export default {
   components: {
     Step1,
     StepSkip,
+    StepSelectSm,
     Step2,
     Step3
   },

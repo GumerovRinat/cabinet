@@ -5,7 +5,6 @@ export default {
   data() {
     return {
       tableData: [],
-      exclusions: [{id: 139, param: 214}, {id: 21, param: 207}]
     };
   },
   methods: {
@@ -19,23 +18,15 @@ export default {
     },
 
     goForth(item) {
-      const obj = this.exclusions.find(x => x.id === item.specId);
-      if (obj) {
-        item.docId = obj.param;
-        item.selectedDept = obj.param;
-        this.$emit("handleGo", {
-          route: "StepSkip",
-          item
-        })
-      }
-      else if (item.specId === 105) {
-        this.$emit("handleGo", { route: "StepSelectSm", id: item.specId, specName: item.specName });
-      }
-      else {
-        this.$emit("handleGo", { route: "Step2", id: item.specId, specName: item.specName });
-      }
+      console.log(item.smId);
+      this.$emit("handleGo", { route: "Step2", id: 105, specName: "Ультразвуковая диагностика", smId: item.smId });
       let docId = this.$get("docId");
-      docId ? this.$setRouter(`?specId=${item.specId}&docId=${docId}`) : this.$setRouter(`?specId=${item.specId}`);
+      docId ? this.$setRouter(`?smId=${item.smId}&docId=${docId}`) : this.$setRouter(`?smId=${item.smId}`);
+    },
+
+    handleBack() {
+      this.$setRouter();
+      this.$emit("handleGo", { route: "Step1", id: null });
     },
 
     handleBackToSite() {
@@ -43,9 +34,10 @@ export default {
     }
   },
   async mounted() {
-    const [error, result] = await api.getAffiliates();
+    const [error, result] = await api.getServiceMedical();
     this.$processResponse(error, result);
     if (error) return;
+    console.log(result);
     this.tableData = result;
     this.checkURL();
   }
@@ -59,15 +51,28 @@ export default {
       rounded
       dark
       color="#3650db"
+      :class="$style.marginRight"
       @click="handleBackToSite"
     >
       Вернуться на сайт
+    </v-btn>
+    <v-btn
+      small
+      rounded
+      dark
+      color="#3650db"
+      @click="handleBack"
+    >
+      <v-icon left>
+        mdi-arrow-expand-left
+      </v-icon>
+      Назад
     </v-btn>
     <div :class="$style.wrapper">
       <table :class="$style.mainTable">
         <thead>
           <tr>
-            <th :class="$style.col1">Выберите специальность врача</th>
+            <th :class="$style.col1">Выберите услугу</th>
           </tr>
         </thead>
         <tbody>
@@ -77,7 +82,7 @@ export default {
             @click="goForth(item)"
           >
             <td :class="$style.overflowWrap">
-              <span :class="$style.textOverflow" v-text="item.specName"></span>
+              <span :class="$style.textOverflow" v-text="item.smName"></span>
             </td>
           </tr>
         </tbody>
@@ -104,6 +109,10 @@ export default {
   right: 0;
   bottom: 0;
   overflow: auto;
+}
+
+.marginRight {
+  margin-right: 20px;
 }
 
 .mainTable {

@@ -82,6 +82,10 @@ if($_GET["a"] === "Specialisation") {
   getQuery($_GET["a"]);
 }
 
+if($_GET["a"] === "Servicemedical") {
+  getQuery($_GET["a"]);
+}
+
 if($_GET["a"] === "Spec") {
   getQuery($_GET["b"]);
 }

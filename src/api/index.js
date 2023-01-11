@@ -27,6 +27,18 @@ export async function getAffiliates() {
   return [error, result];
 }
 
+export async function getServiceMedical() {
+  let error = null;
+  let result = null;
+  try {
+    const { data } = await axios.get("?a=Servicemedical");
+    result = data;
+  } catch (e) {
+    error = e;
+  }
+  return [error, result];
+}
+
 export async function getAffiliate(deptId) {
   let error = null;
   let result = null;
@@ -45,6 +57,20 @@ export async function getPersonnel(deptId) {
   try {
     const { data } = await axios.get(
       `?a=Doctor&b=Doctor/specialisation/${deptId}`
+    );
+    result = data;
+  } catch (e) {
+    error = e;
+  }
+  return [error, result];
+}
+
+export async function getPersonnelBySm(smId) {
+  let error = null;
+  let result = null;
+  try {
+    const { data } = await axios.get(
+      `?a=Doctor&b=Doctor/service-medical/${smId}`
     );
     result = data;
   } catch (e) {
